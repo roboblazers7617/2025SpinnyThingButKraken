@@ -1,8 +1,8 @@
-# Template Robot
+# 2025 Spinny Thing (but Kraken!!!)
 
 ## Javadoc
 
-Javadoc is auto-generated from the main branch and is available [here](https://roboblazers7617.github.io/Template-Robot/index.html).
+Javadoc is auto-generated from the main branch and is available [here](https://roboblazers7617.github.io/2025SpinnyThingButKraken/index.html).
 
 ## Code Standards
 
@@ -12,7 +12,7 @@ Contributions are specified in the code standards [here](https://roboblazers7617
 
 ## Issues
 
-Can be tracked on the [issues tab](https://github.com/roboblazers7617/Template-Robot/issues) and in the [projects panel](https://github.com/orgs/roboblazers7617/projects/6). They should also be in the google sheet.
+Should be tracked on the [issues tab](https://github.com/roboblazers7617/2025SpinnyThingButKraken/issues).
 
 ## New Robot Checklist
 
