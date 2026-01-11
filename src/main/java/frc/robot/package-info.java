@@ -1,4 +1,4 @@
 /**
- * FRC Team 7617's template robot code.
+ * FRC Team 7617's spinny test board code.
  */
 package frc.robot;
