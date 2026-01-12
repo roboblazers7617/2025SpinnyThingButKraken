@@ -9,6 +9,8 @@ import frc.robot.Constants.DashboardConstants;
 import frc.robot.Constants.LoggingConstants;
 import frc.robot.util.Elastic;
 
+import frc.robot.subsystems.Motor;
+
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -35,6 +37,9 @@ public class RobotContainer {
 	 */
 	@NotLogged
 	private final CommandXboxController operatorController = new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
+
+	// Subsystems
+	private final Motor motor = new Motor();
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -82,7 +87,9 @@ public class RobotContainer {
 	/**
 	 * Configures {@link Triggers} to bind Commands to the Operator Controller buttons.
 	 */
-	private void configureOperatorControls() {}
+	private void configureOperatorControls() {
+		motor.setDefaultCommand(motor.setMotorSpeedCommand(() -> operatorController.getRightTriggerAxis()));
+	}
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.
