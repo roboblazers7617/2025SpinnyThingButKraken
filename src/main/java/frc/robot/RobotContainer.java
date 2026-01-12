@@ -47,6 +47,7 @@ public class RobotContainer {
 	public RobotContainer() {
 		// Publish version metadata
 		VersionConstants.publishNetworkTables(NetworkTableInstance.getDefault().getTable("/Metadata"));
+		VersionConstants.logSignals();
 
 		// Configure the trigger bindings
 		configureNamedCommands();

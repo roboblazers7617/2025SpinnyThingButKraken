@@ -5,8 +5,14 @@
 package frc.robot;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.epilogue.logging.FileBackend;
+import edu.wpi.first.epilogue.logging.EpilogueBackend;
+import edu.wpi.first.epilogue.logging.NTEpilogueBackend;
 import edu.wpi.first.net.WebServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
+import com.ctre.phoenix6.HootEpilogueBackend;
+import com.ctre.phoenix6.SignalLogger;
+
 import edu.wpi.first.epilogue.Epilogue;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -44,15 +50,21 @@ public class Robot extends TimedRobot {
 		DataLogManager.start();
 		DriverStation.startDataLog(DataLogManager.getLog());
 		Epilogue.configure(config -> {
-			// if not in debug mode write data to a file
-			if (!LoggingConstants.DEBUG_MODE) {
-				config.backend = new FileBackend(DataLogManager.getLog());
+			if (LoggingConstants.DEBUG_MODE) {
+				// If in debug mode, write data to NetworkTables as well as SignalLogger
+				config.backend = EpilogueBackend.multi(new HootEpilogueBackend(), new NTEpilogueBackend(NetworkTableInstance.getDefault()));
+			} else {
+				// Otherwise just write to SignalLogger
+				config.backend = new HootEpilogueBackend();
 			}
 
 			config.root = "Telemetry";
 			config.minimumImportance = LoggingConstants.DEBUG_LEVEL;
 		});
 		Epilogue.bind(this);
+
+		// Start CTRE SignalLogger
+		SignalLogger.start();
 
 		// Start a WebServer that hosts the deploy directory
 		// This is used for the Elastic layout

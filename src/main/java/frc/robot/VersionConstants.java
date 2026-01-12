@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.ctre.phoenix6.SignalLogger;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.StringPublisher;
 import frc.robot.generated.VersionConstantsGenerated;
@@ -101,5 +103,20 @@ public class VersionConstants {
 		StringPublisher dirtyPublisher = table.getStringTopic("/Dirty")
 				.publish();
 		dirtyPublisher.set((DIRTY != 0) ? "Uncommited changes" : "All changes commited");
+	}
+
+	/**
+	 * Logs the metadata to SignalLogger.
+	 */
+	public static void logSignals() {
+		SignalLogger.writeString("/Metadata/MavenGroup", MAVEN_GROUP);
+		SignalLogger.writeString("/Metadata/MavenName", MAVEN_NAME);
+		SignalLogger.writeString("/Metadata/Version", VERSION);
+		SignalLogger.writeString("/Metadata/GitRevision", String.valueOf(GIT_REVISION));
+		SignalLogger.writeString("/Metadata/GitSHA", GIT_SHA);
+		SignalLogger.writeString("/Metadata/GitDate", GIT_DATE);
+		SignalLogger.writeString("/Metadata/GitBranch", GIT_BRANCH);
+		SignalLogger.writeString("/Metadata/BuildDate", BUILD_DATE);
+		SignalLogger.writeString("/Metadata/Dirty", (DIRTY != 0) ? "Uncommited changes" : "All changes commited");
 	}
 }
